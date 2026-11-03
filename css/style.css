@@ -727,42 +727,6 @@ h2 {
     font-size: 15px;
 }
 
-/* ---------- Formação ---------- */
-
-.edu {
-    list-style: none;
-    margin: 0;
-    padding: 0;
-    border-top: 1px solid var(--line);
-}
-
-.edu li {
-    display: grid;
-    grid-template-columns: 1fr auto auto;
-    gap: 8px 32px;
-    align-items: baseline;
-    padding: 22px 0;
-    border-bottom: 1px solid var(--line);
-}
-
-.edu-course {
-    color: var(--text-strong);
-    font-size: 18px;
-    font-weight: 500;
-}
-
-.edu-school {
-    font-family: var(--font-mono);
-    font-size: 14px;
-    color: var(--accent);
-}
-
-.edu-status {
-    font-family: var(--font-mono);
-    font-size: 13px;
-    color: var(--muted);
-}
-
 /* ---------- Contato ---------- */
 
 .email {
@@ -1031,13 +995,6 @@ h2 {
         text-align: left;
     }
 
-    .edu li {
-        grid-template-columns: 1fr auto;
-    }
-
-    .edu-status {
-        grid-column: 1 / -1;
-    }
 }
 
 /* Movimento reduzido: mantém fades e cor, remove deslocamento e loops */
