@@ -1,12 +1,5 @@
 (function () {
     var root = document.documentElement;
-    var hasObserver = "IntersectionObserver" in window;
-
-    // Só esconde elementos para animar se o navegador conseguir revelá-los depois
-    if (hasObserver) {
-        root.classList.add("js-motion");
-    }
-
 
     // Copiar e-mail: troca o rótulo por 1,6s e avisa leitores de tela
     var copyButton = document.querySelector(".copy");
@@ -32,14 +25,16 @@
 
     // Borda da topbar aparece só depois de rolar
     var topbar = document.querySelector(".topbar");
-    var onScroll = function () {
-        topbar.classList.toggle("is-scrolled", window.scrollY > 8);
-    };
-    window.addEventListener("scroll", onScroll, { passive: true });
-    // Lê o scroll no próximo frame, depois do primeiro layout, para não forçar reflow
-    requestAnimationFrame(onScroll);
+    if (topbar) {
+        var onScroll = function () {
+            topbar.classList.toggle("is-scrolled", window.scrollY > 8);
+        };
+        window.addEventListener("scroll", onScroll, { passive: true });
+        // Lê o scroll no próximo frame, depois do primeiro layout, para não forçar reflow
+        requestAnimationFrame(onScroll);
+    }
 
-    if (!hasObserver) {
+    if (!("IntersectionObserver" in window)) {
         return;
     }
 
@@ -91,4 +86,8 @@
     document.querySelectorAll("section[id]").forEach(function (section) {
         sectionObserver.observe(section);
     });
+
+    // Só esconde os elementos para animar depois que o reveal está pronto:
+    // se algo acima falhar, a página continua visível por inteiro
+    root.classList.add("js-motion");
 })();
