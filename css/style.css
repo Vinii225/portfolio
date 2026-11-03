@@ -1,0 +1,635 @@
+/* Paleta herdada do README do perfil (github.com/Vinii225) */
+:root {
+    --bg: #0d1117;
+    --bg-raised: #161b22;
+    --line: #30363d;
+    --text: #c9d1d9;
+    --text-strong: #ffffff;
+    --muted: #8b949e;
+    --accent: #b794f6;
+    --accent-soft: #e9d8fd;
+    --accent-wash: rgba(183, 148, 246, 0.08);
+
+    --font-sans: "Geist", ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
+    --font-mono: "Geist Mono", ui-monospace, "SFMono-Regular", Menlo, monospace;
+
+    --ease-out: cubic-bezier(0.23, 1, 0.32, 1);
+    --ease-in-out: cubic-bezier(0.77, 0, 0.175, 1);
+
+    --measure: 68ch;
+    --gutter: clamp(20px, 5vw, 48px);
+}
+
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+    scroll-padding-top: 80px;
+    -webkit-text-size-adjust: 100%;
+}
+
+body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--text);
+    font-family: var(--font-sans);
+    font-size: 16px;
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+}
+
+::selection {
+    background: var(--accent);
+    color: var(--bg);
+}
+
+a {
+    color: inherit;
+}
+
+:focus-visible {
+    outline: 2px solid var(--accent);
+    outline-offset: 3px;
+    border-radius: 4px;
+}
+
+code {
+    font-family: var(--font-mono);
+    font-size: 0.875em;
+    color: var(--accent-soft);
+}
+
+.skip {
+    position: absolute;
+    left: 16px;
+    top: -48px;
+    padding: 8px 12px;
+    background: var(--accent);
+    color: var(--bg);
+    border-radius: 6px;
+    font-weight: 500;
+    text-decoration: none;
+    z-index: 20;
+}
+
+.skip:focus {
+    top: 16px;
+}
+
+/* ---------- Topbar ---------- */
+
+.topbar {
+    position: sticky;
+    top: 0;
+    z-index: 10;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 24px;
+    max-width: 1040px;
+    margin: 0 auto;
+    padding: 18px var(--gutter);
+    background: rgba(13, 17, 23, 0.82);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border-bottom: 1px solid transparent;
+    transition: border-color 200ms ease;
+}
+
+.topbar.is-scrolled {
+    border-bottom-color: var(--line);
+}
+
+.mark {
+    font-family: var(--font-mono);
+    font-weight: 500;
+    color: var(--text-strong);
+    text-decoration: none;
+    letter-spacing: -0.02em;
+}
+
+.caret {
+    color: var(--accent);
+    animation: blink 1.1s steps(1) infinite;
+}
+
+@keyframes blink {
+    50% { opacity: 0; }
+}
+
+.topbar nav {
+    display: flex;
+    gap: clamp(14px, 3vw, 28px);
+    font-family: var(--font-mono);
+    font-size: 13px;
+}
+
+.topbar nav a {
+    color: var(--muted);
+    text-decoration: none;
+    transition: color 150ms ease;
+}
+
+.topbar nav a.is-active {
+    color: var(--accent);
+}
+
+@media (hover: hover) and (pointer: fine) {
+    .topbar nav a:hover {
+        color: var(--text-strong);
+    }
+}
+
+/* ---------- Layout ---------- */
+
+main,
+.footer {
+    max-width: 1040px;
+    margin: 0 auto;
+    padding: 0 var(--gutter);
+}
+
+.section {
+    padding: clamp(72px, 12vw, 128px) 0 0;
+}
+
+.section-head {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 24px;
+    flex-wrap: wrap;
+    margin-bottom: 32px;
+}
+
+h1,
+h2,
+h3 {
+    color: var(--text-strong);
+    font-weight: 600;
+    margin: 0;
+}
+
+h2 {
+    font-size: clamp(24px, 3vw, 30px);
+    letter-spacing: -0.025em;
+    line-height: 1.2;
+}
+
+.section-note {
+    margin: 0;
+    color: var(--muted);
+    font-size: 14px;
+}
+
+/* ---------- Divider (mesmo gradiente animado do README) ---------- */
+
+.divider {
+    height: 3px;
+    margin-top: clamp(64px, 10vw, 104px);
+    border-radius: 3px;
+    background: linear-gradient(90deg, var(--accent-soft), var(--accent), var(--accent-soft), var(--accent), var(--accent-soft));
+    background-size: 200% 100%;
+    animation: flow 4s linear infinite;
+    opacity: 0.9;
+}
+
+@keyframes flow {
+    from { background-position: 0% 0; }
+    to { background-position: -200% 0; }
+}
+
+/* ---------- Hero ---------- */
+
+.hero {
+    padding-top: clamp(64px, 14vh, 140px);
+}
+
+.prompt {
+    margin: 0 0 20px;
+    font-family: var(--font-mono);
+    font-size: 14px;
+    color: var(--muted);
+}
+
+.prompt-user {
+    color: var(--accent);
+}
+
+.prompt-path {
+    color: var(--accent-soft);
+}
+
+.hero h1 {
+    font-size: clamp(44px, 9vw, 96px);
+    line-height: 0.98;
+    letter-spacing: -0.045em;
+    text-wrap: balance;
+}
+
+.lede {
+    max-width: 58ch;
+    margin: 28px 0 0;
+    font-size: clamp(17px, 1.6vw, 19px);
+    color: var(--text);
+    text-wrap: pretty;
+}
+
+.lede strong {
+    color: var(--text-strong);
+    font-weight: 500;
+}
+
+.hero-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    margin-top: 36px;
+}
+
+.btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    height: 42px;
+    padding: 0 18px;
+    border-radius: 8px;
+    font-size: 15px;
+    font-weight: 500;
+    text-decoration: none;
+    transition: transform 160ms var(--ease-out), background-color 150ms ease, border-color 150ms ease, color 150ms ease;
+}
+
+.btn:active {
+    transform: scale(0.97);
+}
+
+.btn-primary {
+    background: var(--accent);
+    color: var(--bg);
+}
+
+.btn-ghost {
+    border: 1px solid var(--line);
+    color: var(--text-strong);
+}
+
+@media (hover: hover) and (pointer: fine) {
+    .btn-primary:hover {
+        background: var(--accent-soft);
+    }
+
+    .btn-ghost:hover {
+        border-color: var(--muted);
+    }
+}
+
+.facts {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px 40px;
+    margin: 56px 0 0;
+    font-family: var(--font-mono);
+    font-size: 13px;
+}
+
+.facts div {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+}
+
+.facts dt {
+    color: var(--muted);
+}
+
+.facts dd {
+    margin: 0;
+    color: var(--text-strong);
+}
+
+/* ---------- Projects ---------- */
+
+.projects {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    border-top: 1px solid var(--line);
+}
+
+.project {
+    border-bottom: 1px solid var(--line);
+}
+
+.project a {
+    position: relative;
+    display: grid;
+    grid-template-columns: 48px 1fr auto;
+    gap: 8px 20px;
+    padding: 28px 16px 28px 0;
+    text-decoration: none;
+    isolation: isolate;
+}
+
+/* Faixa de destaque que entra pela esquerda no hover */
+.project a::before {
+    content: "";
+    position: absolute;
+    inset: 0 -16px;
+    z-index: -1;
+    border-radius: 10px;
+    background: var(--accent-wash);
+    clip-path: inset(0 100% 0 0 round 10px);
+    transition: clip-path 260ms var(--ease-out);
+}
+
+.p-index,
+.p-year {
+    font-family: var(--font-mono);
+    font-size: 13px;
+    color: var(--muted);
+    padding-top: 5px;
+    font-variant-numeric: tabular-nums;
+}
+
+.p-body {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    min-width: 0;
+}
+
+.p-title {
+    color: var(--text-strong);
+    font-size: 20px;
+    font-weight: 500;
+    letter-spacing: -0.015em;
+}
+
+.p-arrow {
+    display: inline-block;
+    color: var(--accent);
+    opacity: 0;
+    transform: translate(-4px, 4px);
+    transition: opacity 180ms ease, transform 220ms var(--ease-out);
+}
+
+.p-desc {
+    max-width: var(--measure);
+    color: var(--text);
+    text-wrap: pretty;
+}
+
+.p-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px 14px;
+    margin-top: 4px;
+    font-family: var(--font-mono);
+    font-size: 12px;
+    color: var(--accent);
+}
+
+.p-tags span:not(:last-child)::after {
+    content: "/";
+    margin-left: 14px;
+    color: var(--line);
+}
+
+.project a:focus-visible::before {
+    clip-path: inset(0 0 0 0 round 10px);
+}
+
+.project a:focus-visible .p-arrow {
+    opacity: 1;
+    transform: translate(0, 0);
+}
+
+@media (hover: hover) and (pointer: fine) {
+    .project a:hover::before {
+        clip-path: inset(0 0 0 0 round 10px);
+    }
+
+    .project a:hover .p-arrow {
+        opacity: 1;
+        transform: translate(0, 0);
+    }
+
+    .project a:hover .p-index {
+        color: var(--accent);
+    }
+}
+
+.more {
+    margin: 28px 0 0;
+    color: var(--muted);
+    font-size: 15px;
+}
+
+.more a {
+    color: var(--accent);
+    text-decoration-color: rgba(183, 148, 246, 0.4);
+    text-underline-offset: 3px;
+    transition: text-decoration-color 150ms ease;
+}
+
+.more a:hover {
+    text-decoration-color: var(--accent);
+}
+
+/* ---------- Stack ---------- */
+
+.stack {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 32px;
+}
+
+.stack-group h3 {
+    margin-bottom: 14px;
+    font-family: var(--font-mono);
+    font-size: 12px;
+    font-weight: 500;
+    color: var(--muted);
+    text-transform: lowercase;
+}
+
+.stack-group ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    color: var(--text-strong);
+}
+
+/* ---------- Education ---------- */
+
+.edu {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    border-top: 1px solid var(--line);
+}
+
+.edu li {
+    display: grid;
+    grid-template-columns: 1fr auto auto;
+    gap: 8px 32px;
+    align-items: baseline;
+    padding: 22px 0;
+    border-bottom: 1px solid var(--line);
+}
+
+.edu-course {
+    color: var(--text-strong);
+    font-size: 18px;
+    font-weight: 500;
+}
+
+.edu-school {
+    font-family: var(--font-mono);
+    font-size: 14px;
+    color: var(--accent);
+}
+
+.edu-status {
+    font-family: var(--font-mono);
+    font-size: 13px;
+    color: var(--muted);
+}
+
+/* ---------- Contact ---------- */
+
+.contact {
+    padding-bottom: 24px;
+}
+
+.contact h2 {
+    font-size: clamp(36px, 6vw, 64px);
+    letter-spacing: -0.04em;
+}
+
+.contact p {
+    max-width: 44ch;
+    margin: 16px 0 32px;
+    font-size: 18px;
+}
+
+/* ---------- Footer ---------- */
+
+.footer {
+    padding-bottom: 48px;
+}
+
+.footer .divider {
+    margin-top: 96px;
+}
+
+.footer p {
+    margin: 24px 0 0;
+    font-family: var(--font-mono);
+    font-size: 12px;
+    color: var(--muted);
+}
+
+/* ---------- Motion: entrada e reveal ----------
+   Só são escondidos quando o JS confirmou que vai animar (.js-motion),
+   então sem JS a página aparece completa. */
+
+.js-motion [data-enter] {
+    opacity: 0;
+    transform: translateY(12px);
+    filter: blur(4px);
+    animation: enter 700ms var(--ease-out) forwards;
+}
+
+.js-motion [data-enter="1"] { animation-delay: 60ms; }
+.js-motion [data-enter="2"] { animation-delay: 140ms; }
+.js-motion [data-enter="3"] { animation-delay: 210ms; }
+.js-motion [data-enter="4"] { animation-delay: 280ms; }
+
+@keyframes enter {
+    to {
+        opacity: 1;
+        transform: translateY(0);
+        filter: blur(0);
+    }
+}
+
+.js-motion .reveal {
+    opacity: 0;
+    transform: translateY(16px);
+    transition: opacity 600ms var(--ease-out), transform 600ms var(--ease-out);
+    transition-delay: var(--stagger, 0ms);
+}
+
+.js-motion .reveal.is-visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* ---------- Responsivo ---------- */
+
+@media (max-width: 760px) {
+    .stack {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 32px 20px;
+    }
+
+    .project a {
+        grid-template-columns: 1fr auto;
+    }
+
+    .p-index {
+        display: none;
+    }
+
+    .edu li {
+        grid-template-columns: 1fr auto;
+    }
+
+    .edu-status {
+        grid-column: 1 / -1;
+    }
+}
+
+@media (max-width: 480px) {
+    .topbar nav a[href="#formacao"],
+    .topbar nav a[href="#stack"] {
+        display: none;
+    }
+}
+
+/* Movimento reduzido: mantém fades, remove deslocamento e loops */
+@media (prefers-reduced-motion: reduce) {
+    html {
+        scroll-behavior: auto;
+    }
+
+    .caret,
+    .divider {
+        animation: none;
+    }
+
+    .js-motion [data-enter] {
+        transform: none;
+        filter: none;
+        animation-duration: 200ms;
+    }
+
+    .js-motion .reveal {
+        transform: none;
+        transition-duration: 200ms;
+    }
+
+    .p-arrow {
+        transform: none;
+    }
+}

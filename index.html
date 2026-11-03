@@ -1,11 +1,194 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Portfolio - Vinícius</title>
+    <title>Vinícius Ares · Portfólio</title>
+    <meta name="description" content="Vinícius Ares, estudante de Ciência da Computação (Unipê) e Sistemas para Internet (IFPB). Projetos em Java, Python e web.">
+    <meta name="theme-color" content="#0d1117">
+    <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600&family=Geist+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
-    
+    <a class="skip" href="#projetos">Pular para os projetos</a>
+
+    <header class="topbar">
+        <a class="mark" href="#topo" aria-label="Início">va<span class="caret" aria-hidden="true">_</span></a>
+        <nav aria-label="Seções">
+            <a href="#projetos">projetos</a>
+            <a href="#stack">stack</a>
+            <a href="#formacao">formação</a>
+            <a href="#contato">contato</a>
+        </nav>
+    </header>
+
+    <main id="topo">
+        <section class="hero">
+            <p class="prompt" data-enter="0"><span class="prompt-user">ares@omarchy</span> <span class="prompt-path">~</span> <span class="prompt-sign">$</span> whoami</p>
+            <h1 data-enter="1">Vinícius Ares</h1>
+            <p class="lede" data-enter="2">
+                Estudante de Ciência da Computação na <strong>Unipê</strong> e de Sistemas para Internet no <strong>IFPB</strong>.
+                Construo sistemas web em Java e Spring, ferramentas em Python e, nas horas vagas, overlays de telemetria para sim racing.
+            </p>
+            <div class="hero-actions" data-enter="3">
+                <a class="btn btn-primary" href="#projetos">Ver projetos</a>
+                <a class="btn btn-ghost" href="https://github.com/Vinii225" target="_blank" rel="noopener">GitHub <span aria-hidden="true">↗</span></a>
+            </div>
+            <dl class="facts" data-enter="4">
+                <div><dt>base</dt><dd>Paraíba, Brasil</dd></div>
+                <div><dt>repos públicos</dt><dd>33</dd></div>
+                <div><dt>setup</dt><dd>Arch + Hyprland (Omarchy)</dd></div>
+            </dl>
+        </section>
+
+        <div class="divider" role="presentation"></div>
+
+        <section id="projetos" class="section" aria-labelledby="projetos-titulo">
+            <div class="section-head reveal">
+                <h2 id="projetos-titulo">Projetos</h2>
+                <p class="section-note">Seleção do que está no meu GitHub, do mais recente ao mais antigo.</p>
+            </div>
+
+            <ol class="projects">
+                <li class="project reveal">
+                    <a href="https://github.com/Vinii225/hackbot" target="_blank" rel="noopener">
+                        <span class="p-index">01</span>
+                        <span class="p-body">
+                            <span class="p-title">Hackbot <span class="p-arrow" aria-hidden="true">↗</span></span>
+                            <span class="p-desc">Harness orquestrado por IA para testes de segurança web autorizados (labs da PortSwigger). Um coordenador delega para agentes de recon, caça a vulnerabilidades e relatório. Cada classe (IDOR, command injection, path traversal, XSS) é uma skill plugável.</span>
+                            <span class="p-tags"><span>Python</span><span>Agentes de IA</span><span>AppSec</span></span>
+                        </span>
+                        <span class="p-year">2026</span>
+                    </a>
+                </li>
+                <li class="project reveal">
+                    <a href="https://github.com/Vinii225/aquaflow" target="_blank" rel="noopener">
+                        <span class="p-index">02</span>
+                        <span class="p-body">
+                            <span class="p-title">AquaFlow <span class="p-arrow" aria-hidden="true">↗</span></span>
+                            <span class="p-desc">Gestão de uma escola de natação: piscinas, turmas, grade de horários, reservas, chamada e financeiro com assinaturas e faturas. Sobe inteiro com um <code>docker compose up</code>.</span>
+                            <span class="p-tags"><span>Java 21</span><span>Spring Boot</span><span>PostgreSQL</span><span>Flyway</span><span>Docker</span></span>
+                        </span>
+                        <span class="p-year">2026</span>
+                    </a>
+                </li>
+                <li class="project reveal">
+                    <a href="https://github.com/Vinii225/dmt-overlay" target="_blank" rel="noopener">
+                        <span class="p-index">03</span>
+                        <span class="p-body">
+                            <span class="p-title">DMT Overlay <span class="p-arrow" aria-hidden="true">↗</span></span>
+                            <span class="p-desc">Overlays leves de telemetria para Le Mans Ultimate, feitos para a DMT (Damata Racing): relativo, classificação, delta, combustível e energia virtual, pneus. Distribuído com releases e CI.</span>
+                            <span class="p-tags"><span>Python</span><span>PySide6</span><span>Sim racing</span></span>
+                        </span>
+                        <span class="p-year">2026</span>
+                    </a>
+                </li>
+                <li class="project reveal">
+                    <a href="https://github.com/Vinii225/spendwise" target="_blank" rel="noopener">
+                        <span class="p-index">04</span>
+                        <span class="p-body">
+                            <span class="p-title">SpendWise <span class="p-arrow" aria-hidden="true">↗</span></span>
+                            <span class="p-desc">App web de controle financeiro: transações em contas e cartões, extratos com saldo do período e orçamento anual por categoria. Feito em equipe para Programação para Web II no IFPB.</span>
+                            <span class="p-tags"><span>Java</span><span>Gradle</span><span>Docker</span></span>
+                        </span>
+                        <span class="p-year">2026</span>
+                    </a>
+                </li>
+                <li class="project reveal">
+                    <a href="https://github.com/Vinii225/omarchy-dotfiles-config" target="_blank" rel="noopener">
+                        <span class="p-index">05</span>
+                        <span class="p-body">
+                            <span class="p-title">Omarchy dotfiles <span class="p-arrow" aria-hidden="true">↗</span></span>
+                            <span class="p-desc">Minha configuração de Arch Linux + Hyprland: atalhos, barra, tema, plugins e terminais, com um script que sincroniza tudo.</span>
+                            <span class="p-tags"><span>Lua</span><span>Shell</span><span>Hyprland</span></span>
+                        </span>
+                        <span class="p-year">2026</span>
+                    </a>
+                </li>
+                <li class="project reveal">
+                    <a href="https://github.com/Vinii225/LinkedIn-Analyzer" target="_blank" rel="noopener">
+                        <span class="p-index">06</span>
+                        <span class="p-body">
+                            <span class="p-title">LinkedIn Analyzer <span class="p-arrow" aria-hidden="true">↗</span></span>
+                            <span class="p-desc">Projeto final de Teoria dos Grafos: modela conexões profissionais como grafo e analisa a rede.</span>
+                            <span class="p-tags"><span>Java</span><span>Grafos</span></span>
+                        </span>
+                        <span class="p-year">2026</span>
+                    </a>
+                </li>
+                <li class="project reveal">
+                    <a href="https://cosmictales.vercel.app" target="_blank" rel="noopener">
+                        <span class="p-index">07</span>
+                        <span class="p-body">
+                            <span class="p-title">Cosmic Tales <span class="p-arrow" aria-hidden="true">↗</span></span>
+                            <span class="p-desc">Plataforma educativa sobre clima espacial com histórias interativas e dados da NASA e da NOAA. Feita para o desafio Stellar Stories do NASA Space Apps Challenge.</span>
+                            <span class="p-tags"><span>HTML</span><span>CSS</span><span>JavaScript</span><span>NASA Space Apps</span></span>
+                        </span>
+                        <span class="p-year">2025</span>
+                    </a>
+                </li>
+            </ol>
+
+            <p class="more reveal">Tem mais coisa (Flutter, Groovy, C++, sistemas operacionais) em <a href="https://github.com/Vinii225?tab=repositories" target="_blank" rel="noopener">github.com/Vinii225</a>.</p>
+        </section>
+
+        <section id="stack" class="section" aria-labelledby="stack-titulo">
+            <div class="section-head reveal">
+                <h2 id="stack-titulo">Stack</h2>
+            </div>
+            <div class="stack">
+                <div class="stack-group reveal">
+                    <h3>Linguagens</h3>
+                    <ul><li>Java</li><li>Python</li><li>Groovy</li><li>JavaScript</li><li>TypeScript</li><li>HTML</li><li>CSS</li></ul>
+                </div>
+                <div class="stack-group reveal">
+                    <h3>Frameworks</h3>
+                    <ul><li>Spring Boot</li><li>Hibernate</li><li>React</li><li>Vite</li><li>Tailwind CSS</li></ul>
+                </div>
+                <div class="stack-group reveal">
+                    <h3>Dados e build</h3>
+                    <ul><li>PostgreSQL</li><li>Maven</li><li>Gradle</li><li>Docker</li></ul>
+                </div>
+                <div class="stack-group reveal">
+                    <h3>Ferramentas</h3>
+                    <ul><li>Git</li><li>VS Code</li><li>Omarchy</li><li>Vercel</li><li>Canva</li></ul>
+                </div>
+            </div>
+        </section>
+
+        <section id="formacao" class="section" aria-labelledby="formacao-titulo">
+            <div class="section-head reveal">
+                <h2 id="formacao-titulo">Formação</h2>
+            </div>
+            <ul class="edu">
+                <li class="reveal">
+                    <span class="edu-course">Bacharelado em Ciência da Computação</span>
+                    <span class="edu-school">Unipê</span>
+                    <span class="edu-status">em andamento</span>
+                </li>
+                <li class="reveal">
+                    <span class="edu-course">Tecnólogo em Sistemas para Internet</span>
+                    <span class="edu-school">IFPB</span>
+                    <span class="edu-status">em andamento</span>
+                </li>
+            </ul>
+        </section>
+
+        <section id="contato" class="section contact" aria-labelledby="contato-titulo">
+            <h2 id="contato-titulo" class="reveal">Vamos conversar.</h2>
+            <p class="reveal">Estágio, projeto ou só trocar ideia sobre código: me chama no GitHub.</p>
+            <a class="btn btn-primary" href="https://github.com/Vinii225" target="_blank" rel="noopener">github.com/Vinii225 <span aria-hidden="true">↗</span></a>
+        </section>
+    </main>
+
+    <footer class="footer">
+        <div class="divider" role="presentation"></div>
+        <p>© <span id="ano">2026</span> Vinícius Ares · HTML, CSS e um pouco de JS, sem framework.</p>
+    </footer>
+
+    <script src="js/main.js"></script>
 </body>
 </html>
