@@ -147,17 +147,23 @@ code {
     color: var(--accent);
 }
 
-/* Digita o nome uma vez ao carregar (13 caracteres, um passo por letra) */
+/* Digita o nome uma vez ao carregar (13 caracteres, um passo por letra).
+   O recorte só existe durante a animação: no fim a largura volta a ser a do texto,
+   sem cortar a última letra, e o nome não encolhe quando o menu aperta o topo. */
+.mark {
+    flex-shrink: 0;
+}
+
 .mark-text {
     display: inline-block;
-    overflow: hidden;
+    flex-shrink: 0;
     white-space: nowrap;
-    width: 13ch;
-    animation: type 780ms steps(13, end) 250ms both;
+    animation: type 780ms steps(13, end) 250ms backwards;
 }
 
 @keyframes type {
-    from { width: 0; }
+    from { width: 0; overflow: hidden; }
+    to { width: 13ch; overflow: hidden; }
 }
 
 .caret {
