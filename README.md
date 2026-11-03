@@ -34,7 +34,7 @@ O site apresenta quem eu sou, como falar comigo e os projetos que melhor mostram
 ├── assets/
 │   ├── avatar-200.jpg         # foto (200 e 400 px)
 │   ├── avatar-400.jpg
-│   ├── favicon.svg
+│   ├── favicon.svg            # ícone da aba (também favicon-32.png e apple-touch-icon.png)
 │   ├── og.png                 # prévia ao compartilhar o link
 │   ├── fonts/                 # Geist e Geist Mono (woff2)
 │   └── projetos/              # prévias dos projetos
