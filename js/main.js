@@ -7,7 +7,6 @@
         root.classList.add("js-motion");
     }
 
-    document.getElementById("ano").textContent = new Date().getFullYear();
 
     // Copiar e-mail: troca o rótulo por 1,6s e avisa leitores de tela
     var copyButton = document.querySelector(".copy");

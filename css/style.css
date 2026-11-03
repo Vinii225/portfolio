@@ -194,8 +194,7 @@ code {
 
 /* ---------- Layout ---------- */
 
-main,
-.footer {
+main {
     max-width: 1040px;
     margin: 0 auto;
     padding: 0 var(--gutter);
@@ -723,6 +722,7 @@ h2 {
 
 .more {
     margin: 32px 0 0;
+    padding-bottom: clamp(80px, 12vw, 128px);
     color: var(--muted);
     font-size: 15px;
 }
@@ -806,69 +806,6 @@ h2 {
 @media (hover: hover) and (pointer: fine) {
     .copy:hover {
         border-color: var(--muted);
-    }
-}
-
-/* ---------- Footer ---------- */
-
-.footer {
-    margin-top: clamp(96px, 14vw, 160px);
-    padding-bottom: 40px;
-}
-
-.footer-inner {
-    display: flex;
-    flex-wrap: wrap;
-    align-items: baseline;
-    justify-content: space-between;
-    gap: 16px 32px;
-    padding-top: 28px;
-    border-top: 1px solid var(--line);
-}
-
-.footer-name {
-    margin: 0;
-    color: var(--text-strong);
-    font-weight: 500;
-}
-
-.footer-year {
-    margin-left: 8px;
-    font-family: var(--font-mono);
-    font-size: 12px;
-    font-weight: 400;
-    color: var(--muted);
-}
-
-.footer-links {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 8px 28px;
-    margin: 0;
-    padding: 0;
-    list-style: none;
-    font-family: var(--font-mono);
-    font-size: 13px;
-}
-
-.footer-links a {
-    color: var(--muted);
-    text-decoration: none;
-    transition: color 150ms ease;
-}
-
-.to-top span {
-    display: inline-block;
-    transition: transform 200ms var(--ease-out);
-}
-
-@media (hover: hover) and (pointer: fine) {
-    .footer-links a:hover {
-        color: var(--accent);
-    }
-
-    .to-top:hover span {
-        transform: translateY(-2px);
     }
 }
 
