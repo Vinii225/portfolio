@@ -134,11 +134,30 @@ code {
 }
 
 .mark {
+    display: inline-flex;
+    align-items: baseline;
     font-family: var(--font-mono);
+    font-size: 15px;
     font-weight: 500;
     color: var(--text-strong);
     text-decoration: none;
-    letter-spacing: -0.02em;
+}
+
+.mark-prompt {
+    color: var(--accent);
+}
+
+/* Digita o nome uma vez ao carregar (13 caracteres, um passo por letra) */
+.mark-text {
+    display: inline-block;
+    overflow: hidden;
+    white-space: nowrap;
+    width: 13ch;
+    animation: type 780ms steps(13, end) 250ms both;
+}
+
+@keyframes type {
+    from { width: 0; }
 }
 
 .caret {
@@ -220,9 +239,9 @@ h2 {
 
 .hero {
     display: grid;
-    grid-template-columns: 1fr auto;
-    gap: 0 56px;
-    align-items: center;
+    grid-template-columns: auto 1fr;
+    gap: 0 48px;
+    align-items: start;
     padding-top: clamp(64px, 14vh, 140px);
 }
 
@@ -262,7 +281,8 @@ h2 {
 
 .avatar {
     margin: 0;
-    width: clamp(148px, 18vw, 208px);
+    width: clamp(140px, 16vw, 184px);
+    margin-top: 6px;
     aspect-ratio: 1;
     border-radius: 28px;
     overflow: hidden;
@@ -276,11 +296,15 @@ h2 {
     object-fit: cover;
 }
 
+.contact-block {
+    margin-top: 32px;
+}
+
 .hero-actions {
     display: flex;
     flex-wrap: wrap;
     gap: 12px;
-    margin-top: 36px;
+    margin-top: 20px;
 }
 
 .btn {
@@ -443,8 +467,7 @@ h2 {
 
 .feature-links a,
 .p-extra a,
-.more a,
-.socials a {
+.more a {
     color: var(--accent);
     text-decoration: underline;
     text-decoration-color: rgba(183, 148, 246, 0.35);
@@ -455,8 +478,7 @@ h2 {
 @media (hover: hover) and (pointer: fine) {
     .feature-links a:hover,
     .p-extra a:hover,
-    .more a:hover,
-    .socials a:hover {
+    .more a:hover {
         color: var(--accent-soft);
         text-decoration-color: currentColor;
     }
@@ -743,17 +765,6 @@ h2 {
 
 /* ---------- Contato ---------- */
 
-.contact h2 {
-    font-size: clamp(36px, 6vw, 64px);
-    letter-spacing: -0.04em;
-}
-
-.contact > p {
-    max-width: 44ch;
-    margin: 16px 0 36px;
-    font-size: 18px;
-}
-
 .email {
     display: flex;
     flex-wrap: wrap;
@@ -762,14 +773,14 @@ h2 {
 }
 
 .email-address {
-    font-size: clamp(20px, 3.4vw, 32px);
+    font-size: clamp(19px, 2.2vw, 24px);
     font-weight: 500;
     letter-spacing: -0.02em;
     color: var(--text-strong);
     text-decoration: underline;
     text-decoration-color: var(--line);
-    text-decoration-thickness: 2px;
-    text-underline-offset: 8px;
+    text-decoration-thickness: 1px;
+    text-underline-offset: 6px;
     transition: text-decoration-color 150ms ease;
     overflow-wrap: anywhere;
 }
@@ -834,29 +845,67 @@ h2 {
     }
 }
 
-.socials {
-    display: flex;
-    gap: 24px;
-    margin: 28px 0 0;
-    padding: 0;
-    list-style: none;
-    font-family: var(--font-mono);
-    font-size: 14px;
-}
-
 /* ---------- Footer ---------- */
 
 .footer {
-    padding-bottom: 48px;
+    margin-top: clamp(96px, 14vw, 160px);
+    padding-bottom: 40px;
 }
 
-.footer p {
-    margin: 112px 0 0;
-    padding-top: 24px;
+.footer-inner {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 16px 32px;
+    padding-top: 28px;
     border-top: 1px solid var(--line);
+}
+
+.footer-name {
+    margin: 0;
+    color: var(--text-strong);
+    font-weight: 500;
+}
+
+.footer-year {
+    margin-left: 8px;
     font-family: var(--font-mono);
     font-size: 12px;
+    font-weight: 400;
     color: var(--muted);
+}
+
+.footer-links {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px 28px;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    font-family: var(--font-mono);
+    font-size: 13px;
+}
+
+.footer-links a {
+    color: var(--muted);
+    text-decoration: none;
+    transition: color 150ms ease;
+}
+
+.to-top span {
+    display: inline-block;
+    transition: transform 200ms var(--ease-out);
+}
+
+@media (hover: hover) and (pointer: fine) {
+    .footer-links a:hover {
+        color: var(--accent);
+    }
+
+    .to-top:hover span {
+        transform: translateY(-2px);
+    }
 }
 
 /* ---------- Motion: entrada e reveal ----------
@@ -940,6 +989,10 @@ h2 {
     }
 
     .avatar {
+        margin-top: 0;
+    }
+
+    .avatar {
         grid-row: 1;
         width: 96px;
         border-radius: 22px;
@@ -994,7 +1047,8 @@ h2 {
     }
 
     .caret,
-    .flow-node {
+    .flow-node,
+    .mark-text {
         animation: none;
     }
 
