@@ -9,6 +9,28 @@
 
     document.getElementById("ano").textContent = new Date().getFullYear();
 
+    // Copiar e-mail: troca o rótulo por 1,6s e avisa leitores de tela
+    var copyButton = document.querySelector(".copy");
+    var copyStatus = document.getElementById("copy-status");
+    var copyTimer;
+
+    if (copyButton && navigator.clipboard) {
+        copyButton.addEventListener("click", function () {
+            navigator.clipboard.writeText(copyButton.dataset.copy).then(function () {
+                copyButton.classList.add("is-copied");
+                copyStatus.textContent = "E-mail copiado";
+                clearTimeout(copyTimer);
+                copyTimer = setTimeout(function () {
+                    copyButton.classList.remove("is-copied");
+                    copyStatus.textContent = "";
+                }, 1600);
+            });
+        });
+    } else if (copyButton) {
+        // Sem Clipboard API (ex.: http sem TLS), o link mailto já resolve
+        copyButton.hidden = true;
+    }
+
     // Borda da topbar aparece só depois de rolar
     var topbar = document.querySelector(".topbar");
     var onScroll = function () {
