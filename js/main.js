@@ -37,7 +37,8 @@
         topbar.classList.toggle("is-scrolled", window.scrollY > 8);
     };
     window.addEventListener("scroll", onScroll, { passive: true });
-    onScroll();
+    // Lê o scroll no próximo frame, depois do primeiro layout, para não forçar reflow
+    requestAnimationFrame(onScroll);
 
     if (!hasObserver) {
         return;
