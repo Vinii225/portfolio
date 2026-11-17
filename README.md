@@ -39,7 +39,7 @@ O site apresenta quem eu sou, como falar comigo e os projetos que melhor mostram
 │   ├── fonts/                 # Geist e Geist Mono (woff2)
 │   └── projetos/              # prévias dos projetos
 ├── .htmlhintrc                # regras de validação do HTML
-└── .github/workflows/pipeline.yml
+└── .github/workflows/pipeline.yml  # build, test, SAST, DAST e deploy
 ```
 
 ## Rodando localmente
@@ -56,11 +56,19 @@ Depois é só abrir `http://localhost:8000`.
 
 ## Pipeline
 
-A cada push, o workflow [`pipeline.yml`](.github/workflows/pipeline.yml) roda três etapas:
+A cada push, o workflow [`pipeline.yml`](.github/workflows/pipeline.yml) roda cinco etapas:
 
-1. **Build:** copia `index.html`, `css/`, `js/` e `assets/` para `dist/`.
-2. **Test:** valida o HTML com [htmlhint](https://htmlhint.com/) usando as regras do `.htmlhintrc`.
-3. **Deploy:** publica no GitHub Pages (só na `main`).
+1. **SAST:** o [Semgrep](https://semgrep.dev/) analisa o código-fonte com as regras `p/javascript`, `p/xss`, `p/secrets` e `p/github-actions`. Roda em paralelo com o build.
+2. **Build:** copia `index.html`, `css/`, `js/` e `assets/` para `dist/`.
+3. **Test:** valida o HTML com [htmlhint](https://htmlhint.com/) usando as regras do `.htmlhintrc`.
+4. **DAST:** sobe o `dist/` num servidor local e roda o baseline do [OWASP ZAP](https://www.zaproxy.org/) contra o site no ar.
+5. **Deploy:** publica no GitHub Pages (só na `main`), e só se o SAST e o DAST passarem.
+
+Validações de segurança:
+
+- **SAST** bloqueia a pipeline se houver achado de severidade `ERROR`; os `WARNING` aparecem no resumo do job.
+- **DAST** bloqueia se houver alerta de risco alto; os de risco médio, baixo e informativo aparecem no resumo do job.
+- Os relatórios (`semgrep.json`/`.sarif` e `zap.html`/`.json`) ficam salvos como artefatos de cada execução.
 
 ## Contato
 
