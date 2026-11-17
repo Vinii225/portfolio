@@ -14,6 +14,54 @@ on:
       - develop
 
 jobs:
+  sast:
+    name: SAST (Semgrep)
+    runs-on: ubuntu-latest
+    container:
+      image: semgrep/semgrep
+    steps:
+      - name: Checkout do código
+        uses: actions/checkout@v7
+
+      - name: Análise estática do código-fonte
+        run: |
+          semgrep scan \
+            --config p/javascript \
+            --config p/xss \
+            --config p/secrets \
+            --config p/github-actions \
+            --metrics=off \
+            --json --output semgrep.json \
+            --sarif-output semgrep.sarif
+
+      - name: Validar resultado do SAST
+        run: |
+          python3 - <<'EOF'
+          import json, os
+          data = json.load(open("semgrep.json"))
+          results = data["results"]
+          bloqueantes = [r for r in results if r["extra"]["severity"] == "ERROR"]
+          linhas = ["## SAST (Semgrep)", "", f"- Achados: {len(results)}", f"- Bloqueantes (ERROR): {len(bloqueantes)}", ""]
+          for r in results:
+              linhas.append(f"- `{r['extra']['severity']}` {r['check_id'].split('.')[-1]} em `{r['path']}:{r['start']['line']}`")
+          with open(os.environ["GITHUB_STEP_SUMMARY"], "a") as f:
+              f.write("\n".join(linhas) + "\n")
+          print("\n".join(linhas))
+          if data["errors"]:
+              raise SystemExit(f"Semgrep terminou com {len(data['errors'])} erro(s) de execução")
+          if bloqueantes:
+              raise SystemExit(f"{len(bloqueantes)} achado(s) de severidade ERROR: pipeline bloqueada")
+          EOF
+
+      - name: Salvar relatório do SAST
+        if: always()
+        uses: actions/upload-artifact@v7
+        with:
+          name: sast-semgrep
+          path: |
+            semgrep.json
+            semgrep.sarif
+
   build:
     name: Build
     runs-on: ubuntu-latest
@@ -60,9 +108,63 @@ jobs:
           echo "Iniciando testes de validação do HTML..."
           htmlhint "dist/**/*.html" --config .htmlhintrc
 
+  dast:
+    name: DAST (OWASP ZAP)
+    needs: test
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout do código
+        uses: actions/checkout@v7
+
+      - name: Baixar artefato do build
+        uses: actions/download-artifact@v8
+        with:
+          name: site-build
+          path: dist
+
+      - name: Subir o site para o teste dinâmico
+        run: |
+          python3 -m http.server 8080 --bind 127.0.0.1 --directory dist > /dev/null 2>&1 &
+          for i in $(seq 1 15); do
+            curl -sf http://127.0.0.1:8080/ > /dev/null && exit 0
+            sleep 1
+          done
+          echo "Servidor não respondeu" && exit 1
+
+      - name: Varredura dinâmica com ZAP (baseline)
+        run: |
+          mkdir -p zap && chmod 777 zap
+          docker run --rm --network host -v "$PWD/zap:/zap/wrk:rw" \
+            ghcr.io/zaproxy/zaproxy:stable \
+            zap-baseline.py -t http://127.0.0.1:8080/ -J zap.json -r zap.html -I
+
+      - name: Validar resultado do DAST
+        run: |
+          python3 - <<'EOF'
+          import json, os
+          data = json.load(open("zap/zap.json"))
+          alertas = [a for s in data["site"] for a in s["alerts"]]
+          bloqueantes = [a for a in alertas if int(a["riskcode"]) >= 3]
+          linhas = ["## DAST (OWASP ZAP)", "", f"- Alertas: {len(alertas)}", f"- Bloqueantes (risco alto): {len(bloqueantes)}", ""]
+          for a in sorted(alertas, key=lambda a: -int(a["riskcode"])):
+              linhas.append(f"- `{a['riskdesc']}` {a['name']}")
+          with open(os.environ["GITHUB_STEP_SUMMARY"], "a") as f:
+              f.write("\n".join(linhas) + "\n")
+          print("\n".join(linhas))
+          if bloqueantes:
+              raise SystemExit(f"{len(bloqueantes)} alerta(s) de risco alto: pipeline bloqueada")
+          EOF
+
+      - name: Salvar relatório do DAST
+        if: always()
+        uses: actions/upload-artifact@v7
+        with:
+          name: dast-zap
+          path: zap
+
   deploy:
     name: Deploy
-    needs: test
+    needs: [sast, dast]
     if: github.ref == 'refs/heads/main' && github.event_name == 'push'
     runs-on: ubuntu-latest
     permissions:
