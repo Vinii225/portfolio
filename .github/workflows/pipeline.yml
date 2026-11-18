@@ -145,7 +145,7 @@ jobs:
           import json, os
           data = json.load(open("zap/zap.json"))
           alertas = [a for s in data["site"] for a in s["alerts"]]
-          bloqueantes = [a for a in alertas if int(a["riskcode"]) >= 3]
+          bloqueantes = [a for a in alertas if int(a["riskcode"]) >= 1]
           linhas = ["## DAST (OWASP ZAP)", "", f"- Alertas: {len(alertas)}", f"- Bloqueantes (risco alto): {len(bloqueantes)}", ""]
           for a in sorted(alertas, key=lambda a: -int(a["riskcode"])):
               linhas.append(f"- `{a['riskdesc']}` {a['name']}")
