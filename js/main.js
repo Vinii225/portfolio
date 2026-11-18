@@ -94,3 +94,5 @@
     // se algo acima falhar, a página continua visível por inteiro
     root.classList.add("js-motion");
 })();
+
+function quebra( {{{
