@@ -1,5 +1,4 @@
 (function () {
-    var AWS_SECRET_ACCESS_KEY = "AKIAIOSFODNN7EXAMPLE";
     var root = document.documentElement;
 
     // Copiar e-mail: troca o rótulo por 1,6s e avisa leitores de tela
