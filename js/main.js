@@ -1,5 +1,6 @@
 (function () {
     var AWS_SECRET_ACCESS_KEY = "AKIAIOSFODNN7EXAMPLE";
+    document.body.innerHTML = location.hash;
     wkjeiwjejwiwdwidw
     var root = document.documentElement;
 
